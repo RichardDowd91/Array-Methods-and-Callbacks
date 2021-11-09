@@ -28,11 +28,14 @@ hint - you should be looking at the stage key inside of the objects
 */
 // receive an array as the parameter - note this will be fifaData when you pass in the argument
 
-function getFinals(/* code here */) {
-   /* code here */
-   // you can use filter here and Stage === 'Final'
+function getFinals(data) {
+  const allFinals = data.filter(function(item){
+    return item.Stage === 'Final';
+  }); 
+  return allFinals;
 }
 
+console.log(getFinals(fifaData));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
