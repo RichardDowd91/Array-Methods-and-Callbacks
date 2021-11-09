@@ -28,8 +28,8 @@ hint - you should be looking at the stage key inside of the objects
 */
 // receive an array as the parameter - note this will be fifaData when you pass in the argument
 
-function getFinals(data) {
-  const allFinals = data.filter(function(item){
+function getFinals(array) {
+  const allFinals = array.filter(function(item){
     return item.Stage === 'Final';
   }); 
   return allFinals;
@@ -83,10 +83,18 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 5.
  */
 // 4 parameters - array,getfinalscb, getyearscb, getwinnerscb
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, getFinalscb, getYearscb, getWinnerscb) {
+    const winners = getWinnerscb(array, getFinalscb);
+    const years = getYearscb(array, getFinalscb);
+
+    const string = winners.map(function(item, index){
+        return `In ${years[index]}, ${item} won the world cup!`;
+    });
+    return string;
     // use map - I would map over one array and grab each item and then I would use the index to grab the item in the other array
 }
+
+console.log(getWinnersByYear(fifaData, getFinals, getYears, getWinners));
 
 
 
@@ -100,14 +108,15 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 // getfinalscb(from task 2),
-function getAverageGoals(/* code here */) {
-   /* code here */
-// use .reduce to add up all the goals of the home and away team
+function getAverageGoals(getFinalscb) {
+   const averageGoals = getFinalscb.reduce(function(acc, item ){
+    return acc + item['Home Team Goals'] + item['Away Team Goals'];
+   },0);
+   return (averageGoals / getFinalscb.length).toFixed(2);
 
-// then I would divide that number by the length of the array
-// round to 2 decimal places ** hint - look up toFixed()
 }
 
+console.log(getAverageGoals(getFinals(fifaData)));
 
 //getAverageGoals(getFinals(fifaData)); to invoke function
 
