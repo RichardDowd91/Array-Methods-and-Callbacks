@@ -62,11 +62,13 @@ Use the higher-order function getWinners to do the following:
 4. Returns the names of all winning countries in an array called `winners` */ 
 
 // 2 parameters array, getFinalscb
-function getWinners(array, getfinalscb) {
-    
+function getWinners(array, getFinalscb) {
+    return getFinalscb(array).map(item => item['Home Team Goals'] > item['Away Team Goals'] ? item['Home Team Name'] : item['Away Team Name']);
     // use map 
     //use a conditional if home team goals > away team goals then we want the home team name else we want the away team name
 }
+
+console.log(getWinners(fifaData, getFinals));
 
 
 
